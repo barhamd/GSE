@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="/Users/devinbarham/Programming/jquery/jquery-1.8.1.js"></script>
+        <script type="text/javascript">
+            jQuery(document).ready(function(){
+                $("#grid").click(function(e){
+                    var x = e.pageX - this.offsetLeft;
+                    var y = e.pageY - this.offsetTop;
+                    $('#coordinates').append(x +'&nbsp'+ y +'<br />');
+ 
+
+/*The following is suppose to save the data to a table. It is not working just yet. So far, working on 
+                    /*$('#coordinates').append('<tr>x</tr><tr>y</tr>'); this doesn't work...*/
+                });
+                })
+        </script>
+    </head>
+    <body>
+        <h2 style="float:right;" id="coordinates">
+            x, y <br />
+        </h2>
+        <div style="width: 500px; height: 500px; background:#ccc; float:left;" id="grid">
+            Click for x,y coordinates.
+        </div>
+        <div>
+            <!--This is the proper way to set up a table-->
+            <table>
+                <tr>
+                    <td>row 1, cell 1</td>
+                    <td>row 1, cell 2</td>
+                </tr>
+                <tr>
+                    <td>row 2, cell 1</td>
+                    <td>row 2, cell 2</td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>
