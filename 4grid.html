@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <style type="text/css">
+            #image 
+            {
+            background-image:url('large-grid.jpeg');
+            width:10000px;
+            height:10000px;
+            }
+        </style>
 
         <!--Linking to jquery files-->
         <link type="text/css" href="/Users/devinbarham/Programming/jquery/jquery-ui-1.8.23.custom/css/ui-lightness/jquery-ui-1.8.23.custom.css" rel="stylesheet" />
@@ -22,9 +30,11 @@
                     });
                 })
 
-/*This should enable the div to be resizable*/
+/*This enables #container to be resizable, and also links #grid to resize at the same time.*/
 $(function() {
-        $( "#grid" ).resizable();
+        $("#container").resizable({
+alsoResize: "#grid"
+});
         });
 </script>
 </head>
@@ -35,22 +45,16 @@ $(function() {
         x, y <br />
     </h2>
 
+
+    <!--This is the resizable grid-->
+    <div style="width: 515px; height: 515px; background:#f432cf; float:left; opacity:.4; border:10px;" id="container">
     <!--This is the clickable div-->
-    <div style="width: 500px; height: 500px; background:#ccc; float:left; opacity:.4;" id="grid">
-        Click for x,y coordinates.
+        <div style="width: 500px; height: 500px; background:#ccc; float:left; opacity:.4;" id="grid">
+            Click for x,y coordinates.
+        </div>
     </div>
-    <div>
-        <!--This is the proper way to set up a table-->
-        <table>
-            <tr>
-                <td>row 1, cell 1</td>
-                <td>row 1, cell 2</td>
-            </tr>
-            <tr>
-                <td>row 2, cell 1</td>
-                <td>row 2, cell 2</td>
-            </tr>
-        </table>
+    <!--This is the image div-->
+    <div id="image">
     </div>
 </body>
         </html>
