@@ -23,18 +23,23 @@
 
         <script type="text/javascript">
 
-            /*Displays xy coordinates of mouseclicks in div*/
+
+/*Displays xy coordinates of mouseclicks in div*/
         jQuery(document).ready(function(){
                 $("#grid").click(function(e){
                     var x = e.pageX - this.offsetLeft;
                     var y = e.pageY - this.offsetTop;
-                    $('#coordinates').append('<table>'+'<tr>'+'<td>'+x +'</td>'+ '<td>' + y +'</td>'+'</tr>'+'</table>');
-
-
-                    /*The following is suppose to save the data to a table. It is not working just yet. So far, working on 
-                    /*$('#coordinates').append('<tr>x</tr><tr>y</tr>'); this doesn't work...*/
+                    $('#coordinates').append('<table>'+'<tr>'+'<td>'+x +'</td>'+ '<td>' + y +'</td>'+'</tr>'+'</table>'); /*This is not elegant. It creates a new table for each click, instead of just adding to an existing table.*/
                     });
-                })
+
+/*This displays the current x,y coordinates*/
+$("#grid").mousemove(function(e){
+        var x = e.pageX - this.offsetLeft;
+        var y = e.pageY - this.offsetTop;
+        var pageCoords = "( " + e.pageX + ", " + e.pageY + " )";
+        $("#current").text("Current:" + "( " +x + ", " + y + " )");
+        });
+
 
 /*This enables #container to be resizable, and also links #grid to resize at the same time.*/
 $(function() {
@@ -47,6 +52,8 @@ alsoResize: "#grid"
 $(function() {
         $("#container").draggable({handle: "p"});
         });
+                })
+
     </script>
 </head>
 <body>
@@ -54,6 +61,7 @@ $(function() {
     <!--This displays the xy coordinates-->
     <h2 style="float:right;" id="coordinates">
         x, y <br />
+        <p id = "current"></p>
     </h2>
 
 
