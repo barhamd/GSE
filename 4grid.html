@@ -28,7 +28,7 @@
                 $("#grid").click(function(e){
                     var x = e.pageX - this.offsetLeft;
                     var y = e.pageY - this.offsetTop;
-                    $('#coordinates').append(x +'&nbsp'+ y +'<br />');
+                    $('#coordinates').append('<table>'+'<tr>'+'<td>'+x +'</td>'+ '<td>' + y +'</td>'+'</tr>'+'</table>');
 
 
                     /*The following is suppose to save the data to a table. It is not working just yet. So far, working on 
