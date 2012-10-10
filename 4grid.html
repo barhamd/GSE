@@ -17,14 +17,16 @@
         </style>
 
         <!--Linking to jquery files-->
-        <link type="text/css" href="/Users/devinbarham/Programming/jquery/jquery-ui-1.8.23.custom/css/ui-lightness/jquery-ui-1.8.23.custom.css" rel="stylesheet" />
-        <script src="/Users/devinbarham/Programming/jquery/jquery-ui-1.8.23.custom/js/jquery-1.8.0.min.js"></script>
-        <script src="/Users/devinbarham/Programming/jquery/jquery-ui-1.8.23.custom/js/jquery-ui-1.8.23.custom.min.js"></script>
+        <link type="text/css" href="./jquery/css/ui-lightness/jquery-ui-1.8.23.custom.css" rel="stylesheet" />
+        <script src="./jquery/js/jquery-1.8.0.min.js"></script>
+        <script src="./jquery/js/jquery-ui-1.8.23.custom.min.js"></script>
 
         <script type="text/javascript">
 
 
-/*Displays xy coordinates of mouseclicks in div*/
+
+
+            /*Displays xy coordinates of mouseclicks in div*/
         jQuery(document).ready(function(){
                 $("#grid").click(function(e){
                     var x = e.pageX - this.offsetLeft;
@@ -32,34 +34,52 @@
                     $('#coordinates').append('<table>'+'<tr>'+'<td>'+x +'</td>'+ '<td>' + y +'</td>'+'</tr>'+'</table>'); /*This is not elegant. It creates a new table for each click, instead of just adding to an existing table.*/
                     });
 
-/*This displays the current x,y coordinates*/
-$("#grid").mousemove(function(e){
-        var x = e.pageX - this.offsetLeft;
-        var y = e.pageY - this.offsetTop;
-        var pageCoords = "( " + e.pageX + ", " + e.pageY + " )";
-        $("#current").text("Current:" + "( " +x + ", " + y + " )");
-        });
 
 
-/*This enables #container to be resizable, and also links #grid to resize at the same time.*/
-$(function() {
-        $("#container").resizable({
+
+                /*This displays the current x,y coordinates*/
+                $("#grid").mousemove(function(e){
+                    /****This is all new****/
+                    var gridxmin = $("input").keyup(function(){
+                        var value = $("input").val()});
+                    var gridxmax
+                    var paperxmax
+                    /*Everything up to the previous comment is new*/
+                    var x = ((e.pageX - this.offsetLeft)-11)/(509/10);
+                    var y = e.pageY - this.offsetTop;
+                    var pageCoords = "( " + e.pageX + ", " + e.pageY + " )";
+                    $("#current").text("Current:" + "( " +x + ", " + y + " )" + gridxmin);
+                    });
+
+
+
+
+
+                /*This enables #container to be resizable, and also links #grid to resize at the same time.*/
+                $(function() {
+                    $("#container").resizable({
 alsoResize: "#grid"
 });
-        });
+                    });
+
+
+
 
 /*This enabls #container to be draggable*/
 $(function() {
         $("#container").draggable({handle: "p"});
         });
-                })
+})
 
-    </script>
+
+
+</script>
 </head>
 <body>
 
     <!--This displays the xy coordinates-->
     <h2 style="float:right;" id="coordinates">
+        <input type="text" value="xmin"/>
         x, y <br />
         <p id = "current"></p>
     </h2>
