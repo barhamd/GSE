@@ -39,13 +39,13 @@
 
                 /*This displays the current x,y coordinates*/
                 $("#grid").mousemove(function(e){
-                    /****This is all new****/
+                    /****This is all new
                     var gridxmin = $("input").keyup(function(){
                         var value = $("input").val()});
                     var gridxmax
                     var paperxmax
-                    /*Everything up to the previous comment is new*/
-                    var x = ((e.pageX - this.offsetLeft)-11)/(509/10);
+                    Everything up to the previous comment is new*/
+                    var x = e.pageX - this.offsetLeft;
                     var y = e.pageY - this.offsetTop;
                     var pageCoords = "( " + e.pageX + ", " + e.pageY + " )";
                     $("#current").text("Current:" + "( " +x + ", " + y + " )" + gridxmin);
