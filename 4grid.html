@@ -39,18 +39,20 @@
 
                 /*This displays the current x,y coordinates*/
                 $("#grid").mousemove(function(e){
-                    /****This is all new
-                    var gridxmin = $("input").keyup(function(){
-                        var value = $("input").val()});
-                    var gridxmax
-                    var paperxmax
-                    Everything up to the previous comment is new*/
-                    var x = e.pageX - this.offsetLeft;
-                    var y = e.pageY - this.offsetTop;
-                    var pageCoords = "( " + e.pageX + ", " + e.pageY + " )";
-                    $("#current").text("Current:" + "( " +x + ", " + y + " )" + gridxmin);
+                    var xpixelmin = parseInt($("#xpixelmin").val());
+                    var xpixelmax = parseInt($("#xpixelmax").val());
+                    var xpapermax = parseInt($("#xpapermax").val());
+                    var xcalibfactor = xpapermax/(xpixelmax-xpixelmin);
+                    var xpixel = e.pageX - this.offsetLeft;
+                    var ypixelmin = parseInt($("#ypixelmin").val());
+                    var ypixelmax = parseInt($("#ypixelmax").val());
+                    var ypapermax = parseInt($("#ypapermax").val());
+                    var ycalibfactor = ypapermax/(ypixelmax-ypixelmin);
+                    var ypixel = e.pageY - this.offsetLeft;
+                    var xcorrected = (xpixel - xpixelmin)*(xcalibfactor);
+                    var ycorrected = -1*(ypixel - ypixelmax)*(ycalibfactor)+1;/*I'm not sure why I have to add 1 to this to make it accurate...*/
+                    $("#current").text("Current:" + "( " +xcorrected.toFixed(0) + ", " + ycorrected.toFixed(0) + " )");
                     });
-
 
 
 
@@ -79,7 +81,12 @@ $(function() {
 
     <!--This displays the xy coordinates-->
     <h2 style="float:right;" id="coordinates">
-        <input type="text" value="xmin"/>
+        xpixelmin<input id="xpixelmin" type="text" value="60"/><br />
+        xpixelmax<input id="xpixelmax" type="text" value="411"/><br />
+        xpapermax<input id="xpapermax" type="text" value="7"/><br />
+        ypixelmin<input id="ypixelmin" type="text" value="60"/><br />
+        ypixelmax<input id="ypixelmax" type="text" value="411"/><br />
+        ypapermax<input id="ypapermax" type="text" value="7"/><br />
         x, y <br />
         <p id = "current"></p>
     </h2>
